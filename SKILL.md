@@ -1,9 +1,19 @@
 ---
 name: korean-tech-threader
-description: Transform user-provided source text, notes, URLs, or rough ideas about AI, IT, software development, startups, infrastructure, automation, and productivity into short, sharp Korean tech thread posts. Use when the user asks to rewrite, adapt, summarize, or draft content as a Korean social media thread with a casual practitioner tone, factual grounding, concise rhythm, a strong opening, a mid-thread turn, realistic operational risk, and a memorable closing.
+description: Transform user-provided source text, notes, URLs, or rough ideas about AI, IT, software development, startups, infrastructure, automation, and productivity into short, sharp Korean tech thread posts. Use when the user asks to rewrite, adapt, summarize, or draft content as a Korean social media thread with a modular persona, casual practitioner tone, factual grounding, concise rhythm, a strong opening, a mid-thread turn, realistic operational risk, and a memorable closing.
 ---
 
 # Korean Tech Threader
+
+## Persona Module
+
+Before writing a thread, load and apply the default persona module:
+
+- `references/personas.md#sharp-practitioner`
+
+If the user names a different persona in the future, load the matching persona module from `references/personas.md`. If no persona is specified, always use `sharp-practitioner`.
+
+Use the persona module as the primary voice layer. Use the rest of this `SKILL.md` as the detailed style, structure, verification, and output guide.
 
 ## 목적
 

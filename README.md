@@ -30,6 +30,7 @@ AI, IT, 개발, 스타트업, 인프라, 자동화, 생산성 이야기를
 - 비용, 장애, 실패, 운영 리스크 같은 현실적인 포인트를 강조합니다.
 - 사실 검증이 필요한 내용은 리서치와 신뢰도 확인을 우선합니다.
 - 근거가 부족한 수치, 모델명, 기업명, 보고서명은 임의로 만들어내지 않도록 안내합니다.
+- 현재 기본 말투와 스타일을 `sharp-practitioner` 페르소나 모듈로 불러옵니다.
 
 ## Skill Name
 
@@ -48,6 +49,8 @@ Korean Tech Threader
 ```text
 .
 |-- SKILL.md
+|-- references/
+|   `-- personas.md
 `-- README.md
 ```
 
@@ -97,6 +100,30 @@ You can also ask for a specific angle:
 
 ```text
 Use $korean-tech-threader. Make this about the hidden operating cost of AI automation.
+```
+
+## Persona Modules
+
+The default persona is:
+
+```text
+sharp-practitioner
+```
+
+It writes like a Korean tech practitioner who has shipped real systems, seen production failures, and prefers operational reality over shallow hype.
+
+Use it explicitly like this:
+
+```text
+Use $korean-tech-threader with persona sharp-practitioner.
+
+[paste source text here]
+```
+
+More personas can be added later in:
+
+```text
+references/personas.md
 ```
 
 ## Output Style
