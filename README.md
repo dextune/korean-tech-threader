@@ -23,127 +23,293 @@ AI, IT, 개발, 스타트업, 인프라, 자동화, 생산성 이야기를
 내용은 얕지 않게.
 끝은 기억나게.
 
-## What It Does
+## 하는 일
 
 - 긴 원문을 모바일에서 읽기 쉬운 한국어 스레드로 변환합니다.
+- URL, 메모, 초안, 아이디어를 스레드 게시물 형태로 바꿉니다.
 - 반말 기반의 캐주얼한 실무자 톤을 유지합니다.
 - 비용, 장애, 실패, 운영 리스크 같은 현실적인 포인트를 강조합니다.
 - 사실 검증이 필요한 내용은 리서치와 신뢰도 확인을 우선합니다.
 - 근거가 부족한 수치, 모델명, 기업명, 보고서명은 임의로 만들어내지 않도록 안내합니다.
-- 현재 기본 말투와 스타일을 `sharp-practitioner` 페르소나 모듈로 불러옵니다.
+- 현재 기본 말투와 스타일은 `실무자` 페르소나 모듈로 불러옵니다.
+- 공통 스레드 작성 규칙과 페르소나별 말투를 분리해서 적용합니다.
 
-## Skill Name
+## 스킬명
 
 ```text
-korean-tech-threader
+ktt
 ```
 
-Display name:
+표시명:
 
 ```text
 Korean Tech Threader
 ```
 
-## Repository Structure
+## 저장소 구조
 
 ```text
 .
 |-- SKILL.md
 |-- references/
-|   `-- personas.md
+|   |-- thread-common.md
+|   |-- thread-hacker.md
+|   `-- thread-practitioner.md
 `-- README.md
 ```
 
-## Installation
+## 설치
 
 ### Codex
 
-Copy this skill folder into one of Codex's skill locations, for example:
+이 스킬 폴더를 Codex 스킬 위치에 복사합니다.
 
 ```text
-~/.agents/skills/korean-tech-threader
+~/.agents/skills/ktt
 ```
 
-For a repository-local install, place it under:
+저장소 안에서만 쓰려면 아래 위치에 둡니다.
 
 ```text
-.agents/skills/korean-tech-threader
+.agents/skills/ktt
 ```
 
-Then restart Codex if the skill does not appear automatically.
+스킬이 바로 보이지 않으면 Codex를 다시 시작합니다.
 
 ### Claude Code
 
-Copy this skill folder into:
+이 스킬 폴더를 아래 위치에 복사합니다.
 
 ```text
-~/.claude/skills/korean-tech-threader
+~/.claude/skills/ktt
 ```
 
-Or install it as a project skill under:
+프로젝트 안에서만 쓰려면 아래 위치에 둡니다.
 
 ```text
-.claude/skills/korean-tech-threader
+.claude/skills/ktt
 ```
 
-## Usage
+## 실제 사용 방법
 
-Invoke the skill and provide source material:
+기본 형식은 이렇습니다.
 
 ```text
-Use $korean-tech-threader to turn the following notes into a Korean tech thread:
-
-[paste source text here]
+$ktt 페르소나명 URL 또는 내용
 ```
 
-You can also ask for a specific angle:
+조금 더 읽기 쉽게 쓰려면 이렇게 줄을 나눠도 됩니다.
 
 ```text
-Use $korean-tech-threader. Make this about the hidden operating cost of AI automation.
+$ktt 페르소나명
+URL 또는 내용
 ```
 
-## Persona Modules
-
-The default persona is:
+### URL로 만들기
 
 ```text
-sharp-practitioner
+$ktt 실무자
+https://example.com/article-about-ai-infra
 ```
 
-It writes like a Korean tech practitioner who has shipped real systems, seen production failures, and prefers operational reality over shallow hype.
+URL 내용을 바탕으로 한국어 테크 스레드를 만듭니다.
 
-Use it explicitly like this:
+최신 정보나 사실 확인이 필요한 내용이면
+스킬은 원문과 추가 자료를 확인한 뒤
+검증 가능한 범위에서만 씁니다.
+
+### 긴 원문으로 만들기
 
 ```text
-Use $korean-tech-threader with persona sharp-practitioner.
-
-[paste source text here]
+$ktt 실무자
+최근 우리 팀이 AI 자동화 기능을 붙이면서 느낀 건,
+모델 성능보다 운영 비용과 실패 복구가 훨씬 더 큰 문제였다는 점이다.
+처음에는 API 호출만 붙이면 된다고 생각했지만,
+로그, 권한, 재시도, 사용자 실수 처리가 붙으면서 복잡도가 빠르게 커졌다.
 ```
 
-More personas can be added later in:
+원문을 짧은 문장,
+모바일에서 읽기 쉬운 줄바꿈,
+중간 반전,
+현실적인 운영 리스크가 있는 스레드로 바꿉니다.
+
+### 메모만 던지기
 
 ```text
-references/personas.md
+$ktt 실무자
+- 배포 자동화 만들 때 버튼만 보면 안 됨
+- 실패 로그, 롤백 조건, 권한 분리가 더 중요
+- 중간에 멈췄을 때 어디서 끊겼는지 알아야 함
+- 결론은 복구 가능한 흐름
 ```
 
-## Output Style
+흩어진 메모를 하나의 주장으로 묶고,
+읽히는 순서로 다시 구성합니다.
 
-The generated thread should feel:
+### 원하는 각도까지 같이 주기
 
-- short
-- readable
-- practical
-- slightly sharp
-- grounded in facts
-- memorable at the end
+```text
+$ktt 실무자
+각도: AI 자동화의 숨은 운영 비용
 
-It should avoid sounding like:
+요즘 팀들이 AI 자동화를 빠르게 붙이고 있는데,
+처음에는 생산성이 바로 오를 것처럼 보인다.
+하지만 실제로는 실패 처리, 로그, 권한, 비용 추적이 붙으면서
+생각보다 운영 부담이 커진다.
+```
 
-- a news article
-- an academic summary
-- a corporate blog post
-- an exaggerated advertisement
+각도를 같이 주면
+스킬은 그 관점으로 원문을 재구성합니다.
 
-## License
+### 페르소나를 생략하기
 
-Add your preferred license before publishing.
+```text
+$ktt
+AI 검색 기능을 만들 때 검색 점수보다 중요한 건
+왜 그런 결과가 나왔는지 추적할 수 있는 구조다.
+```
+
+페르소나를 생략하면 기본값인 `실무자`를 사용합니다.
+
+### 페르소나 목록 보기
+
+```text
+ktt 목록
+```
+
+또는:
+
+```text
+$ktt 목록
+```
+
+현재 구현된 페르소나 목록,
+각 페르소나가 불러오는 모듈 파일,
+짧은 설명,
+그리고 말투를 보여주는 3문장 안팎의 짧은 예시글을 출력합니다.
+
+## 모듈 구조
+
+Korean Tech Threader는 두 단계로 작동합니다.
+
+1. `references/thread-common.md`를 먼저 불러와 모든 스레드에 공통으로 적용되는 작성 규칙을 적용합니다.
+2. 페르소나명에 매핑된 영어 모듈 파일에서 말투와 화법을 불러옵니다.
+
+공통 모듈이 담당하는 것:
+
+- 스레드 구조
+- 훅
+- 반전
+- 결론
+- 문장 길이
+- 줄바꿈
+- 사실 검증
+- 원문 사용 규칙
+
+페르소나 모듈이 담당하는 것:
+
+- 말투
+- 문장 온도
+- 관점
+- 강조하는 리스크
+- 독자에게 말을 거는 방식
+
+페르소나 파일은 영어 모듈명으로 추가합니다.
+
+```text
+references/thread-module-name.md
+```
+
+사용자가 입력하는 페르소나명은 한글이어도 됩니다.
+다만 실제 모듈 파일명은 영어로 둡니다.
+
+예를 들어 `실무자` 페르소나는 아래 파일에 있습니다.
+
+```text
+references/thread-practitioner.md
+```
+
+현재 매핑:
+
+```text
+실무자 -> references/thread-practitioner.md
+해커 -> references/thread-hacker.md
+```
+
+## 현재 페르소나 리스트
+
+### 실무자
+
+실제 시스템을 만들어봤고,
+운영에서 터지는 문제를 겪어본 한국어 테크 실무자 말투입니다.
+
+데모의 화려함보다
+비용, 장애, 실패 복구, 로그, 권한, 운영 부담을 먼저 봅니다.
+
+특징:
+
+- 짧고 강한 문장
+- 반말 기반의 스레드체
+- 실무자가 공감할 만한 문제 제기
+- 과장보다 검증 우선
+- 중간에 한 번 꺾이는 반전
+- 마지막에 기억나는 결론
+
+호출 예시:
+
+```text
+$ktt 실무자
+내용 또는 URL
+```
+
+### 해커
+
+작은 도구, 작업 흐름, 자동화 조합, 개발 환경 개선을 빠르게 실험하는 말투입니다.
+
+긴 설명보다
+작동 방식,
+도구 조합,
+비용 구조,
+바로 해볼 수 있는 실험을 먼저 보여줍니다.
+
+특징:
+
+- 매우 짧고 단정적인 문장
+- `핵심은 단순하다` 식의 압축된 전개
+- 도구를 조합하는 관점
+- 작은 실험, 비용 절감, 빠른 검증 강조
+- 장황한 튜토리얼보다 해킹 노트에 가까운 느낌
+
+호출 예시:
+
+```text
+$ktt 해커
+내용 또는 URL
+```
+
+목록에서 확인:
+
+```text
+ktt 목록
+```
+
+## 출력 스타일
+
+생성되는 글은 이런 느낌이어야 합니다.
+
+- 짧음
+- 읽기 쉬움
+- 근거가 있음
+- 마지막 문장이 남음
+- 페르소나별 말투가 분명함
+
+피해야 하는 느낌은 이렇습니다.
+
+- 뉴스 기사체
+- 논문 요약체
+- 회사 블로그체
+- 과장된 광고 문구
+
+## 라이선스
+
+배포 전에 원하는 라이선스를 추가하세요.
