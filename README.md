@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="#빠른-사용"><img alt="Skill" src="https://img.shields.io/badge/skill-ktt-111111"></a>
-  <a href="#페르소나"><img alt="Personas" src="https://img.shields.io/badge/personas-4-3376A0"></a>
+  <a href="#페르소나-목록"><img alt="Personas" src="https://img.shields.io/badge/personas-5-3376A0"></a>
   <a href="#자세한-설명"><img alt="Guide" src="https://img.shields.io/badge/guide-short-0f172a"></a>
 </p>
 
@@ -65,6 +65,18 @@ AI 검색에서 중요한 건 점수보다 결과를 추적할 수 있는 구조
 $ktt 목록
 ```
 
+## 페르소나 생성
+
+참고할 텍스트나 이미지를 바탕으로 새 페르소나 모듈을 만들 수 있습니다.
+
+```text
+$ktt 생성
+참고할 텍스트 또는 이미지
+```
+
+이 명령은 `MAKE.md`의 규칙을 따라 말투를 분석하고,
+새 `references/thread-<module-name>.md` 파일과 스킬 매핑을 갱신합니다.
+
 
 
 <br>
@@ -84,8 +96,8 @@ $ktt 목록
 
 | 원칙 | 설명 |
 |---|---|
-| 모듈 | 공통 파일은 입력, 검증, 원문 보호를 맡습니다. |
-| 검증 | 확인되지 않은 수치나 이름은 단정하지 않습니다. |
+| 모듈 | 공통 파일은 입력, 정보 수집, 교차 검증, 원문 보호를 맡습니다. |
+| 검증 | 정보성 글은 공식 또는 신뢰 가능한 출처를 확인하고 교차 검증합니다. |
 | 원문 보호 | 제공된 문장이나 고유 표현을 그대로 재사용하지 않습니다. |
 | 페르소나 | 말투, 줄바꿈, 구조, 결론 방식은 선택한 페르소나를 따릅니다. |
 
@@ -93,7 +105,9 @@ $ktt 목록
 
 ```text
 .
+|-- AGENTS.md
 |-- SKILL.md
+|-- MAKE.md
 |-- assets/
 |   |-- ktt-readme.jpg
 |   |-- ktt-title.svg
@@ -103,7 +117,8 @@ $ktt 목록
 |   |-- thread-chingeun-banmal.md
 |   |-- thread-guim.md
 |   |-- thread-johnmunga.md
-|   `-- thread-segfault.md
+|   |-- thread-segfault.md
+|   `-- thread-trust.md
 `-- README.md
 ```
 
@@ -116,7 +131,7 @@ flowchart LR
 
 KTT는 공통 시스템과 페르소나 모듈을 분리합니다.
 
-`thread-common.md`는 입력 해석, 페르소나 선택, 사실 검증, 원문 보호처럼 모든 페르소나에 공통으로 필요한 운영 규칙만 담당합니다.
+`thread-common.md`는 입력 해석, 페르소나 선택, 정보 수집, 교차 검증, 원문 보호처럼 모든 페르소나에 공통으로 필요한 운영 규칙만 담당합니다.
 각 `thread-<module-name>.md` 파일은 말투, 줄바꿈, 전개 구조, 강조 지점, 결론 방식처럼 공통화하면 안 되는 문체 규칙을 독립적으로 정의합니다.
 
 그래서 새 페르소나가 늘어나도 공통 파일을 비대하게 만들지 않습니다.
@@ -124,11 +139,12 @@ KTT는 공통 시스템과 페르소나 모듈을 분리합니다.
 
 | 모듈 | 역할 |
 |---|---|
-| `thread-common.md` | 모듈 로드, 입력 해석, 사실 검증, 원문 보호 |
+| `thread-common.md` | 모듈 로드, 입력 해석, 정보 수집, 교차 검증, 원문 보호 |
 | `thread-chingeun-banmal.md` | `친근반말` 말투 |
 | `thread-guim.md` | `거임` 말투 |
 | `thread-johnmunga.md` | `존문가` 말투 |
 | `thread-segfault.md` | `세그폴트` 말투 |
+| `thread-trust.md` | `신뢰` 말투 |
 
 새 페르소나의 호출명은 한글 1단어로 정합니다.
 
@@ -168,6 +184,12 @@ AI 기능 붙일 때 다들 모델부터 봄.
 개발 도구 쪽에도 조용히 변화가 생기고 있어.
 겉으로는 작은 업데이트처럼 보여도, 작업 흐름이 짧아지면 개발자 체감은 꽤 크지.
 지금 흐름만 보면 도구 경쟁이 기능 목록보다 피드백 속도 쪽으로 옮겨가는 느낌이야.
+
+`신뢰`
+
+배포 설정의 기본 캐시 정책이 바뀌면서 새 프로젝트에는 정적 자산 캐시가 자동 적용됩니다.
+기존 프로젝트는 설정 파일을 갱신해야 같은 동작을 사용할 수 있으며, 캐시 기간은 배포 환경에 따라 달라질 수 있습니다.
+현재 확인된 의미는 설정 부담이 줄고 작은 프로젝트의 기본 성능 기준이 올라간다는 점입니다.
 
 ## 라이선스
 
