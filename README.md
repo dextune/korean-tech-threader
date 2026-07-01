@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/ktt-tagline.svg" alt="당신도 테크 스레드가 되고 싶은가요?" width="900">
+  <img src="assets/ktt-tagline.svg" alt="당신도 테크 스레더가 되고 싶은가요?" width="900">
 </p>
 
 <p align="center">
